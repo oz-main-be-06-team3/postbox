@@ -15,6 +15,7 @@ on:
 
 	pull_request:
 
+
 jobs:
   ci:
 	  # 가장 최신버젼의 ubuntu를 OS 환경으로 설정합니다.
