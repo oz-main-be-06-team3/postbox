@@ -115,7 +115,7 @@ jobs:
           POSTGRES_USER: ${{ secrets.PG_USER }}
           POSTGRES_PASSWORD: ${{ secrets.PG_PASSWORD }}
           POSTGRES_DB: ${{ secrets.PG_NAME }}
-        options: >-
+        options:
           --health-cmd pg_isready -U ${{ secrets.PG_USER }} -d ${{ secrets.PG_NAME }}
           --health-interval 10s
           --health-timeout 5s
