@@ -5,15 +5,15 @@ name: Project ci
 # 트리거 이벤트 부분
 # 코드가 푸시되거나 풀 리퀘스트가 생성될 때 CI가 실행됩니다.
 on:
-	push:
-		branches:
-          - main
-          - develop1 # 개발
-          - feature # 기능
-          - release # 배포
-          - hotfix # 빨리 고치기
+  push:
+      branches:
+        - main
+        - develop1 # 개발
+        - feature # 기능
+        - release # 배포
+        - hotfix # 빨리 고치기
 
-	pull_request:
+  pull_request:
 
 
 jobs:
