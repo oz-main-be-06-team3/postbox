@@ -88,7 +88,7 @@
 #    - name: Test python project
 #      run: |
 #        poetry run python manage.py test
-#
+
 
 #name: Project ci
 #
@@ -176,63 +176,58 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-
     services:
       db:
         image: postgres:14
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test_db
+          POSTGRES_USER: ${{ secrets.PG_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.PG_NAME }}
         options: >-
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
 
-    env:
-      PG_USER: ${{ secrets.PG_USER }}
-      PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
-      PG_NAME: ${{ secrets.PG_NAME }}
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.13'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
 
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
-      - name: Install Packages & Libraries
-        run: |
-          poetry install
+    - name: Install Packages & Libraries
+      run: |
+        poetry install
 
-      - name: Run isort (Import sorting)
-        run: |
-          poetry run isort . --check --diff
+    - name: Run isort (Import sorting)
+      run: |
+        poetry run isort . --check --diff
 
-      - name: Run black (Code formatting)
-        run: |
-          poetry run black . --check
+    - name: Run black (Code formatting)
+      run: |
+        poetry run black . --check
 
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until pg_isready -h localhost -p 5432 -U ${{ env.PG_USER }} -d ${{ env.PG_NAME }}; do
-            sleep 1
-          done
+    - name: Wait for PostgreSQL
+      run: |
+        until pg_isready -h localhost -p 5432 -U ${{ secrets.PG_USER }}; do
+          sleep 1
+        done
 
-      - name: Run Django Migration
-        run: |
-          poetry run python manage.py makemigrations
-          poetry run python manage.py migrate
+    - name: Run Django Migration
+      run: |
+        poetry run python manage.py makemigrations
+        poetry run python manage.py migrate
 
-      - name: Test python project
-        run: |
-          poetry run python manage.py test
+    - name: Test python project
+      run: |
+        poetry run python manage.py test
