@@ -1,2 +1,3 @@
 from .urls import *
+
 urlpatterns = []

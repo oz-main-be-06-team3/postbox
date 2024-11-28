@@ -7,7 +7,12 @@ name: Project ci
 on:
 	push:
 		branches:
-			- main
+          - main
+          - develop1 # 개발
+          - feature # 기능
+          - release # 배포
+          - hotfix # 빨리 고치기
+
 	pull_request:
 
 jobs:
