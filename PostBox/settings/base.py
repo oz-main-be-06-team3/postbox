@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'PostBox.urls'
+ROOT_URLCONF = 'PostBox.urls.dev_url'
 
 TEMPLATES = [
     {
