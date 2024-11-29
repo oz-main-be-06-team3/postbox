@@ -37,6 +37,7 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -44,6 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "PostBox",
     "rest_framework",
+    "users",
+    "account",
+    "transaction_history",
 ]
 
 MIDDLEWARE = [
@@ -83,14 +87,14 @@ WSGI_APPLICATION = "PostBox.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postboxdb",
+        "NAME": "postbox",
         "USER": "root",
         "PASSWORD": "0123",
         "HOST": "localhost",
         "PORT": "5432",
     }
 }
-
+AUTH_USER_MODEL = "users.Users"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
