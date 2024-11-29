@@ -24,9 +24,9 @@ class UserManager(BaseUserManager):
 class Users(AbstractUser):
     email = models.EmailField(unique=True, null=False)
     password = models.CharField(max_length=128, null=False)
-    nickname = models.CharField(max_length=10, null=False)
-    name = models.CharField(max_length=10, null=False)
-    phone = models.CharField(max_length=10, null=False)
+    nickname = models.CharField(max_length=50, null=False)
+    name = models.CharField(max_length=50, null=False)
+    phone = models.CharField(max_length=20, null=False)
     last_login = models.DateTimeField(null=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
