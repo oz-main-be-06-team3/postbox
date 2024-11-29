@@ -9,7 +9,7 @@ WSGI_APPLICATION = "PostBox.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "posetboxdb",
+        "NAME": "postbox",
         "USER": "root",
         "PASSWORD": "0123",
         "HOST": "localhost",

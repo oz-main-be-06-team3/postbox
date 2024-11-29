@@ -33,4 +33,4 @@
 # ERD
 
 
-![스크린샷 2024-11-28 오후 6.26.14.png](../../Desktop/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-11-28%20%EC%98%A4%ED%9B%84%206.26.14.png)
+![postboxerd](https://github.com/user-attachments/assets/4b314101-e1f9-4a5f-aa60-aa93d5f99a21)
