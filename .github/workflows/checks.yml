@@ -75,6 +75,10 @@ jobs:
         poetry run python manage.py makemigrations
         poetry run python manage.py migrate
 
+    - name: Wait for DB
+      run: |
+        poetry run python manage.py wait_for_db
+
     - name: Test python project
       run: |
         poetry run python manage.py test

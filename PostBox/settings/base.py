@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "users",
     "account",
     "transaction_history",
+    "core",
 ]
 
 MIDDLEWARE = [
