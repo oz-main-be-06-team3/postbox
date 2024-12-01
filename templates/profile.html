@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>프로필</h1>
+    <form method="POST" action="/profile/">
+        {% csrf_token %}
+        <label for="email">이메일:</label>
+        <input type="email" name="email" id="email" value="{{ user.email }}" readonly><br>
+
+        <label for="nickname">닉네임:</label>
+        <input type="text" name="nickname" id="nickname" value="{{ user.nickname }}"><br>
+
+        <label for="name">이름:</label>
+        <input type="text" name="name" id="name" value="{{ user.name }}"><br>
+
+        <label for="phone">전화번호:</label>
+        <input type="text" name="phone" id="phone" value="{{ user.phone }}"><br>
+
+        <button type="submit">프로필 수정</button>
+    </form>
+    <form method="POST" action="/profile/">
+        {% csrf_token %}
+        <button type="submit" name="_method" value="DELETE">계정 삭제</button>
+    </form>
+</body>
+</html>

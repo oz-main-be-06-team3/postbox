@@ -31,6 +31,15 @@ ALLOWED_HOSTS = ["*"]
 # Rest_Framework
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+}
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
 
 
@@ -49,6 +58,7 @@ INSTALLED_APPS = [
     "account",
     "transaction_history",
     "core",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 MIDDLEWARE = [
@@ -123,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "ko"
 
 # TIME_ZONE = 'UTC'
-TIME_ZONE = "Asia/Seoul/"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 

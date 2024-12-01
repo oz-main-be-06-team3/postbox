@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+</head>
+<body>
+    <h1>로그아웃</h1>
+    <form method="POST" action="/logout/">
+        {% csrf_token %}
+        <input type="hidden" name="refresh" value="{{ refresh_token }}">
+        <button type="submit">로그아웃</button>
+    </form>
+</body>
+</html>
