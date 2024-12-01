@@ -2,9 +2,10 @@ from django.contrib.auth.hashers import make_password
 from django.utils.crypto import get_random_string
 from rest_framework import generics, serializers
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework.response import Response
+from rest_framework_simplejwt.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from .models import Users
 
 
@@ -50,8 +51,6 @@ class UserProfileView(generics.RetrieveUpdateDestroyAPIView):
         return Response({"message": "Deleted successfully"}, status=200)
 
 
-
-
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -61,4 +60,3 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise AuthenticationFailed("User account is disabled.", code="user_disabled")
 
         return data
-

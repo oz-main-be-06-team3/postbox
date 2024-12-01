@@ -7,10 +7,14 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .serializers import CustomTokenObtainPairSerializer
 
 from .models import Users
-from .serializers import RegisterSerializer, UserProfileSerializer, UserSerializer
+from .serializers import (
+    CustomTokenObtainPairSerializer,
+    RegisterSerializer,
+    UserProfileSerializer,
+    UserSerializer,
+)
 
 
 def home(request):
@@ -113,7 +117,6 @@ class UserProfileView(APIView):
         # 계정 삭제
         request.user.delete()
         return Response({"message": "Deleted successfully"}, status=200)
-
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
