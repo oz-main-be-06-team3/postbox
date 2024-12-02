@@ -26,8 +26,8 @@ from drf_spectacular.views import (
 from users.views import home
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", home, name="home"),  # 루트 URL에 home 뷰 매핑
+    path("admin/", admin.site.urls),  # 관리자 페이지
+    path("", include("users.urls")),  # 루트 경로에서 users 앱의 URL을 포함
     path("users/", include("users.urls")),  # users 앱 URL 연결
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),

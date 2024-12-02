@@ -27,9 +27,7 @@ from users.views import home
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home, name="home"),  # 루트 URL에 home 뷰 매핑
-    path("users/", include("users.urls")),  # users 앱 URL 연결
-    path("schema/", SpectacularAPIView.as_view(), name="schema"),
-    path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
-    path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path("users/", include("users.urls")),  # 사용자 관련 API
+    path("accounts/", include("account.urls")),  # 계좌 관련 API
+    path("transactions/", include("transaction_history.urls")),  # 거래 내역 관련 API
 ]

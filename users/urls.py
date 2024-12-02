@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LogoutView
+from django.http import HttpResponse
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -18,4 +19,13 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("profile/", UserProfileView.as_view(), name="user_profile"),
+]
+
+
+def home_view(request):
+    return HttpResponse("<h1>Welcome Home!</h1>")
+
+
+urlpatterns += [
+    path("home/", home_view, name="home"),
 ]

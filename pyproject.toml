@@ -10,6 +10,7 @@ python = "^3.13"
 djangorestframework = "^3.15.2"
 psycopg2 = "^2.9.10"
 djangorestframework-simplejwt = "^5.3.1"
+serializers = "^0.2.4"
 
 
 [tool.poetry.group.dev.dependencies]

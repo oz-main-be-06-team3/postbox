@@ -23,13 +23,16 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
-from users.views import home
+from users.views import LoginView, RegisterView, home
 
 urlpatterns = [
-    path("admin/", admin.site.urls),  # 관리자 페이지
-    path("", include("users.urls")),  # 루트 경로에서 users 앱의 URL을 포함
-    path("users/", include("users.urls")),  # users 앱 URL 연결
+    path("admin/", admin.site.urls),
+    path("users/", include("users.urls")),  # 사용자 관련 API
+    path("accounts/", include("account.urls")),  # 계좌 관련 API
+    path("transactions/", include("transaction_history.urls")),  # 거래 내역 관련 API
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
     path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path("register/", RegisterView.as_view(), name="register"),
+    path("login/", LoginView.as_view(), name="login"),
 ]

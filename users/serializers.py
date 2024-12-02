@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.hashers import make_password
 from django.utils.crypto import get_random_string
 from rest_framework import generics, serializers
@@ -10,16 +12,27 @@ from .models import Users
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    email_verification_token = serializers.CharField(read_only=True)
+
     class Meta:
         model = Users
-        fields = ["email", "nickname", "name", "password", "phone"]
-        extra_kwargs = {"password": {"write_only": True}}
+        fields = ["email", "nickname", "name", "password", "phone", "email_verification_token"]
+        # extra_kwargs = {"password": {"write_only": True}}
+
+    def validate_username(self, value):
+        # username 중복 확인
+        if Users.objects.filter(username=value).exists():
+            raise serializers.ValidationError("이미 사용 중인 사용자 이름입니다.")
+        return value
 
     def create(self, validated_data):
-        # 암호화된 비밀번호 저장
-        validated_data["password"] = make_password(validated_data["password"])
-        validated_data["email_verification_token"] = get_random_string(length=64)
-        return super().create(validated_data)
+        # email_verification_token은 생성자에 전달되지 않도록 제외
+        validated_data["email_verification_token"] = uuid.uuid4().hex  # 고유 토큰 생성
+        password = validated_data.pop("password")  # 비밀번호 처리
+        user = Users(**validated_data)
+        user.set_password(password)  # 비밀번호 암호화
+        user.save()
+        return user
 
 
 class UserSerializer(serializers.ModelSerializer):

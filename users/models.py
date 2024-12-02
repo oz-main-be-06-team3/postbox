@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
 
 class Users(AbstractUser):
     email = models.EmailField(unique=True, null=False)
+    email_verification_token = models.CharField(max_length=32, blank=True, null=True)  # 이메일 인증 토큰 필드
     password = models.CharField(max_length=128, null=False)
     nickname = models.CharField(max_length=50, null=False)
     name = models.CharField(max_length=50, null=False)
@@ -31,11 +32,11 @@ class Users(AbstractUser):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    username = None
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
-
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["nickname", "name"]
 
     class Meta:
         db_table = "users"

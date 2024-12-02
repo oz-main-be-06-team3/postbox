@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="postboxdb@localhost" uuid="d39e5e18-8eb0-41f4-b2f2-18896d0e23e2">
+    <data-source source="LOCAL" name="postbox@localhost" uuid="d39e5e18-8eb0-41f4-b2f2-18896d0e23e2">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postboxdb</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postbox</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

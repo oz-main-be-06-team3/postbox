@@ -16,6 +16,11 @@ class Account(models.Model, Constraint):
     # 잔액
     balance = models.IntegerField(null=False, blank=False, default=0)
 
+    def save(self, *args, **kwargs):
+        if self.pk:
+            raise ValueError("Accounts cannot be modified after creation.")
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.account_num
 

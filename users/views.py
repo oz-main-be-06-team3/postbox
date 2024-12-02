@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -18,7 +20,7 @@ from .serializers import (
 
 
 def home(request):
-    return HttpResponse("<h1>Welcome to the Home Page</h1>")
+    return render(request, "main.html")
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -26,6 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class RegisterView(APIView):
     def get(self, request):
         # GET 요청 시 HTML 템플릿 렌더링
@@ -36,7 +39,7 @@ class RegisterView(APIView):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "회원가입 성공"}, status=201)
+            return redirect("home")
         return Response(serializer.errors, status=400)
 
 
@@ -70,6 +73,7 @@ class LoginView(TokenObtainPairView):
             # 본문에서 토큰을 제거 (옵션)
             del response.data["access"]
             del response.data["refresh"]
+            return redirect("/users/")
         return response
 
 
@@ -93,7 +97,7 @@ class LogoutView(APIView):
             # Refresh Token 블랙리스트에 추가
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response({"message": "Logout successful"}, status=200)
+            return redirect("home")
         except Exception as e:
             return Response({"error": str(e)}, status=400)
 
