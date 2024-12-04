@@ -11,6 +11,7 @@ djangorestframework = "^3.15.2"
 psycopg2 = "^2.9.10"
 djangorestframework-simplejwt = "^5.3.1"
 serializers = "^0.2.4"
+dj-rest-auth = "^7.0.0"
 
 
 [tool.poetry.group.dev.dependencies]

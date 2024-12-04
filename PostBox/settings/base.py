@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ["*"]
 # Rest_Framework
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PERMISSION_CLASSES": "rest_framework.permissions.IsAuthenticated",
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # 클래스 이름
+    ],
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
 }
 from datetime import timedelta
@@ -44,7 +46,16 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_BLACKLIST": True,
 }
-
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'My API Documentation',  # API 제목
+    'DESCRIPTION': 'API documentation for my project.',  # API 설명
+    'VERSION': '1.0.0',  # 버전
+    'SERVE_INCLUDE_SCHEMA': True,  # /schema/에 OpenAPI 스키마 포함
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+    },
+}
 
 # Application definition
 
@@ -57,11 +68,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "PostBox",
     "rest_framework",
+    "rest_framework.authtoken",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
     "users",
     "account",
     "transaction_history",
     "core",
-    "rest_framework_simplejwt.token_blacklist",
 ]
 
 MIDDLEWARE = [

@@ -2,28 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management</title>
 </head>
 <body>
-    <h1>계</h1>
-    <form method="POST" action="/register/">
+    <h1>Account Management</h1>
+
+    <h2>Account List</h2>
+    <div id="account-list">
+        <!-- 계좌 목록이 여기에 표시됩니다 -->
+    </div>
+
+    <h2>Create New Account</h2>
+    <form id="account-create-form" method="post" action="/accounts/">
         {% csrf_token %}
-        <label for="email">이메일:</label>
-        <input type="email" name="email" id="email" required><br>
-
-        <label for="nickname">닉네임:</label>
-        <input type="text" name="nickname" id="nickname" required><br>
-
-        <label for="name">이름:</label>
-        <input type="text" name="name" id="name" required><br>
-
-        <label for="password">비밀번호:</label>
-        <input type="password" name="password" id="password" required><br>
-
-        <label for="phone">전화번호:</label>
-        <input type="text" name="phone" id="phone" required><br>
-
-        <button type="submit" href="users/">회원가입</button>
+        <label for="account_num">Account Number:</label>
+        <input type="text" id="account_num" name="account_num" required><br>
+        <label for="bank_code">Bank Code:</label>
+        <input type="text" id="bank_code" name="bank_code" required><br>
+        <label for="account_kind">Account Type:</label>
+        <input type="text" id="account_kind" name="account_kind" required><br>
+        <button type="submit">Create Account</button>
     </form>
 </body>
 </html>
