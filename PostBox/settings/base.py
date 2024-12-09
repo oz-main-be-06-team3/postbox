@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     "account",
     "transaction_history",
     "core",
+    "analysis",
 ]
 
 MIDDLEWARE = [
